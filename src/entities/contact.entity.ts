@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import Client from "./client.entity";
 
 @Entity("contacts")
@@ -12,11 +19,14 @@ class Contact {
   @Column({ unique: true, type: "varchar" })
   email: string;
 
-  @Column({ type: "integer" })
+  @Column({ type: "decimal" })
   telephone: number;
 
-  @Column({ type: "date" })
-  registrationDate: Date;
+  @CreateDateColumn({ type: "date" })
+  createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => Client, (client: Client) => client.contact)
   client: Client;

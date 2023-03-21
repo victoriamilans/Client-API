@@ -1,12 +1,13 @@
-import "reflect-metadata";
-import express from "express";
 import "express-async-errors";
-import { handleError } from "./errors";
+import express, { Application } from "express";
+import clientRoutes from "./routes/client.route";
+import { handleErrors } from "./errors";
 
-const app = express();
+const app: Application = express();
 
 app.use(express.json());
 
-app.use(handleError);
+app.use("/client", clientRoutes);
+app.use(handleErrors);
 
 export default app;

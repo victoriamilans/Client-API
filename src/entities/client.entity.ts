@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import Contact from "./contact.entity";
 
 @Entity("clients")
@@ -12,13 +19,18 @@ class Client {
   @Column({ unique: true, type: "varchar" })
   email: string;
 
-  @Column({ type: "integer" })
+  @Column({ type: "decimal" })
   telephone: number;
 
-  @Column({ type: "date" })
-  registrationDate: Date;
+  @CreateDateColumn({ type: "date" })
+  createdAt: Date;
 
-  @OneToMany(() => Contact, (contact: Contact) => contact.client)
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @OneToMany(() => Contact, (contact: Contact) => contact.client, {
+    eager: true,
+  })
   contact: Contact[];
 }
 
