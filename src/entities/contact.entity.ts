@@ -21,7 +21,7 @@ class Contact {
   email: string;
 
   @Column({ type: "varchar" })
-  telephone: string;
+  phone: string;
 
   @Column({ type: "boolean" })
   isDefault: boolean;

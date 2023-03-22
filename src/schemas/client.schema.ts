@@ -5,7 +5,7 @@ export const clientSchema = z.object({
   fullName: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(6),
-  telephone: z.string(),
+  phone: z.string(),
 });
 
 export const clientToReturnSchema: any = clientSchema

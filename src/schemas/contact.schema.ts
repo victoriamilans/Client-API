@@ -4,7 +4,7 @@ import { clientToReturnSchema } from "./client.schema";
 export const contactSchema = z.object({
   fullName: z.string(),
   email: z.string().email(),
-  telephone: z.string(),
+  phone: z.string(),
   isDefault: z.boolean(),
 });
 

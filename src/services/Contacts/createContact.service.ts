@@ -6,7 +6,7 @@ import { IContact } from "../../interfaces/contact.interface";
 import { contactToReturnSchema } from "../../schemas/contact.schema";
 
 export const createContactService = async (
-  { fullName, email, telephone, isDefault }: IContact,
+  { fullName, email, phone, isDefault }: IContact,
   client: string
 ) => {
   const contactRepository = AppDataSource.getRepository(Contact);
@@ -27,7 +27,7 @@ export const createContactService = async (
   const newContact = contactRepository.create({
     fullName: fullName,
     email: email,
-    telephone: telephone,
+    phone: phone,
     client: findClient,
     isDefault: isDefault,
   });
