@@ -5,6 +5,7 @@ import { deleteClientController } from "../controllers/Client/deleteClient.contr
 import { listAllClientsController } from "../controllers/Client/listAllClients.controller";
 import { listClientByIdController } from "../controllers/Client/listClientById.controller";
 import { createContactController } from "../controllers/Contacts/createContact.controller";
+import { listClientContactController } from "../controllers/Contacts/listClientContacts.controller";
 import { ensureDataIsValidMiddleware } from "../middlewares/validatedSchema.middleware";
 import { verifyClientTokenMiddleware } from "../middlewares/verifyClientToken.middleware";
 import { contactSchema } from "../schemas/contact.schema";
@@ -17,5 +18,7 @@ contactRoutes.post(
   verifyClientTokenMiddleware,
   createContactController
 );
+
+contactRoutes.get("", verifyClientTokenMiddleware, listClientContactController);
 
 export default contactRoutes;

@@ -35,7 +35,7 @@ class Contact {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToOne(() => Client, (client: Client) => client.contact)
+  @ManyToOne(() => Client, (client: Client) => client.contacts)
   client: Client;
 }
 

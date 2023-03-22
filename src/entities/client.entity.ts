@@ -38,10 +38,10 @@ class Client {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(() => Contact, (contact: Contact) => contact.client, {
+  @OneToMany(() => Contact, (contacts: Contact) => contacts.client, {
     eager: true,
   })
-  contact: Contact[];
+  contacts: Contact[];
 
   @BeforeInsert()
   @BeforeUpdate()

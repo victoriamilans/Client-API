@@ -14,7 +14,7 @@ export const clientToReturnSchema: any = clientSchema
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
-    contact: z.array(contactToReturnSchema),
+    contacts: z.array(contactToReturnSchema.omit({ client: true })),
   })
   .omit({ password: true });
 
