@@ -17,11 +17,11 @@ class Contact {
   @Column({ type: "varchar" })
   fullName: string;
 
-  @Column({ unique: true, type: "varchar" })
+  @Column({ type: "varchar" })
   email: string;
 
-  @Column({ type: "decimal" })
-  telephone: number;
+  @Column({ type: "varchar" })
+  telephone: string;
 
   @Column({ type: "boolean" })
   isDefault: boolean;
@@ -35,7 +35,7 @@ class Contact {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToOne(() => Client, (client: Client) => client.contact)
+  @ManyToOne(() => Client, (client: Client) => client.contacts)
   client: Client;
 }
 

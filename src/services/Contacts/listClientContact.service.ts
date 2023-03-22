@@ -1,16 +1,29 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import Client from "../../entities/client.entity";
-import { IClientResponse } from "../../interfaces/client.interface";
-import { multipleClientsSchema } from "../../schemas/client.schema";
+import Contact from "../../entities/contact.entity";
 
-export const listAllClientsService = async (payload: any): Promise<any> => {
+export const listClientContactsService = async (
+  clientId: string,
+  payload: any
+): Promise<any> => {
+  const clientRepository = AppDataSource.getRepository(Client);
+  const contactRepository = AppDataSource.getRepository(Contact);
+
+  const findClient: Client | null = await clientRepository.findOne({
+    where: {
+      id: clientId,
+    },
+  });
+
   const page = payload.page ? parseInt(payload.page.toString()) : 1;
   const limit = payload.limit ? parseInt(payload.limit.toString()) : 5;
   const skip = (page - 1) * limit;
 
-  let [clients, totalResults] = await AppDataSource.getRepository(Client)
-    .createQueryBuilder("clients")
+  const [contacts, totalResults] = await AppDataSource.getRepository(Contact)
+    .createQueryBuilder("contacts")
+    .leftJoinAndSelect("contacts.client", "client")
+    .where("client.id = :id", { id: clientId })
+    .orderBy("contacts.isDefault", "DESC")
     .skip(skip)
     .take(limit)
     .getManyAndCount();
@@ -29,7 +42,7 @@ export const listAllClientsService = async (payload: any): Promise<any> => {
       page > 1
         ? `http://localhost:3000/movies?page=${page - 1}&limit=${limit}`
         : null,
-    clients,
+    contacts,
   };
 
   return response;

@@ -1,15 +1,19 @@
 import { z } from "zod";
+import { clientToReturnSchema } from "./client.schema";
 
 export const contactSchema = z.object({
   fullName: z.string(),
   email: z.string().email(),
-  telephone: z.number(),
-  clientId: z.string(),
+  telephone: z.string(),
+  isDefault: z.boolean(),
 });
 
 export const contactToReturnSchema = contactSchema.extend({
   id: z.string(),
-  createdAt: z.date(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  deletedAt: z.string().nullable(),
+  client: clientToReturnSchema,
 });
 
 export const multipleContactsSchema = contactSchema.array();

@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { boolean } from "zod";
 import Contact from "./contact.entity";
 
 @Entity("clients")
@@ -29,6 +30,9 @@ class Client {
   @Column({ type: "varchar" })
   telephone: string;
 
+  @Column({ type: "boolean", default: true })
+  isActive: boolean;
+
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
 
@@ -38,10 +42,10 @@ class Client {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(() => Contact, (contact: Contact) => contact.client, {
+  @OneToMany(() => Contact, (contacts: Contact) => contacts.client, {
     eager: true,
   })
-  contact: Contact[];
+  contacts: Contact[];
 
   @BeforeInsert()
   @BeforeUpdate()
