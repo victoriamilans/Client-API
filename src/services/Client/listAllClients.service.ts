@@ -10,7 +10,7 @@ export const listAllClientsService = async (): Promise<IClientResponse[]> => {
 
   const allClients = await clientRepository.find();
 
-  const Clients = multipleClientsSchema.parse(allClients);
+  const clients = multipleClientsSchema.parse(allClients);
 
-  return Clients;
+  return clients;
 };

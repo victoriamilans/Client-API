@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { contactToReturnSchema } from "./contact.schema";
 
 export const clientSchema = z.object({
   fullName: z.string().min(3),
@@ -7,12 +8,13 @@ export const clientSchema = z.object({
   telephone: z.string(),
 });
 
-export const clientToReturnSchema = clientSchema
+export const clientToReturnSchema: any = clientSchema
   .extend({
     id: z.string(),
     createdAt: z.string(),
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
+    contact: z.array(contactToReturnSchema),
   })
   .omit({ password: true });
 
