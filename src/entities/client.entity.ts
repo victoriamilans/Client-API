@@ -1,10 +1,14 @@
+import { getRounds, hashSync } from "bcryptjs";
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import Contact from "./contact.entity";
 
@@ -19,11 +23,17 @@ class Client {
   @Column({ unique: true, type: "varchar" })
   email: string;
 
-  @Column({ type: "decimal" })
-  telephone: number;
+  @Column({ type: "varchar" })
+  password: string;
+
+  @Column({ type: "varchar" })
+  telephone: string;
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date;
@@ -32,6 +42,15 @@ class Client {
     eager: true,
   })
   contact: Contact[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const encryptHash = getRounds(this.password);
+    if (!encryptHash) {
+      this.password = hashSync(this.password, 10);
+    }
+  }
 }
 
 export default Client;

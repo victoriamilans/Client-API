@@ -1,13 +1,12 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import Client from "../entities/client.entity";
-import { AppError } from "../errors";
-import { IClient } from "../interfaces/client.interface";
+import { IClient, IClientResponse } from "../interfaces/client.interface";
 import { clientToReturnSchema } from "../schemas/client.schema";
 
 export const createClientService = async (
   userData: IClient
-): Promise<IClient> => {
+): Promise<IClientResponse> => {
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
 

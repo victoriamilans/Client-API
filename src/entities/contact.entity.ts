@@ -5,6 +5,7 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import Client from "./client.entity";
 
@@ -22,8 +23,14 @@ class Contact {
   @Column({ type: "decimal" })
   telephone: number;
 
-  @CreateDateColumn({ type: "date" })
+  @Column({ type: "boolean" })
+  isDefault: boolean;
+
+  @CreateDateColumn({ type: "date", default: false })
   createdAt: Date;
+
+  @UpdateDateColumn({ type: "date" })
+  updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date;

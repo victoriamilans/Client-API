@@ -1,11 +1,12 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import Client from "../entities/client.entity";
-import { IClient } from "../interfaces/client.interface";
+import { IClientResponse } from "../interfaces/client.interface";
+import { clientToReturnSchema } from "../schemas/client.schema";
 
 export const listClientByIdService = async (
   clientId: string
-): Promise<IClient | null> => {
+): Promise<IClientResponse | null> => {
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
 
@@ -15,5 +16,7 @@ export const listClientByIdService = async (
     },
   });
 
-  return client;
+  const searchedClient = clientToReturnSchema.parse(client);
+
+  return searchedClient;
 };
