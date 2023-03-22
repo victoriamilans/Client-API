@@ -23,6 +23,7 @@ export const listClientContactsService = async (
     .createQueryBuilder("contacts")
     .leftJoinAndSelect("contacts.client", "client")
     .where("client.id = :id", { id: clientId })
+    .orderBy("contacts.isDefault", "DESC")
     .skip(skip)
     .take(limit)
     .getManyAndCount();
