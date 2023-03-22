@@ -1,9 +1,9 @@
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { AppDataSource } from "../data-source";
-import Client from "../entities/client.entity";
-import { AppError } from "../errors";
-import { ILogin } from "../interfaces/login.interface";
+import { AppDataSource } from "../../data-source";
+import Client from "../../entities/client.entity";
+import { AppError } from "../../errors";
+import { ILogin } from "../../interfaces/login.interface";
 import "dotenv/config";
 
 export const clientLoginService = async (payload: ILogin): Promise<object> => {

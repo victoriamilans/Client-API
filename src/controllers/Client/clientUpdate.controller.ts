@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IClientUpdate } from "../interfaces/client.interface";
-import { clientUpdateService } from "../services/clientUpdate.service";
+import { IClientUpdate } from "../../interfaces/client.interface";
+import { clientUpdateService } from "../../services/Client/clientUpdate.service";
 
 export const clientUpdateController = async (req: Request, res: Response) => {
   const userData: IClientUpdate = req.body;

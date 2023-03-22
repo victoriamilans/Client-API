@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { clientUpdateController } from "../controllers/clientUpdate.controller";
-import { createClientController } from "../controllers/createClient.controller";
-import { deleteClientController } from "../controllers/deleteClient.controller";
-import { listAllClientsController } from "../controllers/listAllClients.controller";
-import { listClientByIdController } from "../controllers/listClientById.controller";
+import { clientUpdateController } from "../controllers/Client/clientUpdate.controller";
+import { createClientController } from "../controllers/Client/createClient.controller";
+import { deleteClientController } from "../controllers/Client/deleteClient.controller";
+import { listAllClientsController } from "../controllers/Client/listAllClients.controller";
+import { listClientByIdController } from "../controllers/Client/listClientById.controller";
 import { ensureDataIsValidMiddleware } from "../middlewares/validatedSchema.middleware";
 import { verifyClientPermissionMiddleware } from "../middlewares/verifyClientPermission.middleware";
 import { verifyClientTokenMiddleware } from "../middlewares/verifyClientToken.middleware";

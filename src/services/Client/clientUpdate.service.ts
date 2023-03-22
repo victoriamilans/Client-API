@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
-import { AppDataSource } from "../data-source";
-import Client from "../entities/client.entity";
-import { IClientUpdate } from "../interfaces/client.interface";
-import { clientToReturnSchema } from "../schemas/client.schema";
+import { AppDataSource } from "../../data-source";
+import Client from "../../entities/client.entity";
+import { IClientUpdate } from "../../interfaces/client.interface";
+import { clientToReturnSchema } from "../../schemas/client.schema";
 
 export const clientUpdateService = async (
   clientId: string,
