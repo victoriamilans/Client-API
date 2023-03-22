@@ -1,13 +1,23 @@
 import { z } from "zod";
 
 export const clientSchema = z.object({
-  id: z.string(),
-  fullName: z.string(),
+  fullName: z.string().min(3),
   email: z.string().email(),
-  telephone: z.number(),
-  registrationDate: z.date(),
+  password: z.string().min(6),
+  telephone: z.string(),
 });
 
-export const clientsToReturnSchema = clientSchema.array();
+export const clientToReturnSchema = clientSchema
+  .extend({
+    id: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    deletedAt: z.string().nullable(),
+  })
+  .omit({ password: true });
 
-export const clientUpdateSchema = clientSchema.partial();
+export const multipleClientsSchema = clientToReturnSchema.array();
+
+export const clientUpdateSchema = clientSchema
+  .partial()
+  .omit({ password: true });
