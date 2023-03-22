@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { boolean } from "zod";
 import Contact from "./contact.entity";
 
 @Entity("clients")
@@ -28,6 +29,9 @@ class Client {
 
   @Column({ type: "varchar" })
   telephone: string;
+
+  @Column({ type: "boolean", default: true })
+  isActive: boolean;
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
