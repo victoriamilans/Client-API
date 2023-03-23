@@ -1,18 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "typeRoots": ["src/@types", "node_modules/@types"],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "exactOptionalPropertyTypes": true,
-    "skipLibCheck": true,
+    "target": "es6",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false,
-    "outDir": "./dist"
-  },
-  "include": ["src", "app.ts"],
-  "exclude": ["node_modules"]
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "typeRoots": ["src/@types", "node_modules/@types"]
+  }
 }
