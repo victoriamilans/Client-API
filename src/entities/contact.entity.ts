@@ -23,10 +23,10 @@ class Contact {
   @Column({ type: "varchar" })
   phone: string;
 
-  @Column({ type: "boolean" })
+  @Column({ type: "boolean", default: false })
   isDefault: boolean;
 
-  @CreateDateColumn({ type: "date", default: false })
+  @CreateDateColumn({ type: "date" })
   createdAt: Date;
 
   @UpdateDateColumn({ type: "date" })
