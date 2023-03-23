@@ -3,7 +3,7 @@ import { deleteClientService } from "../../services/Client/deleteClient.service"
 
 export const deleteClientController = async (req: Request, res: Response) => {
   const clientId: string = req.params.id;
-  const client = deleteClientService(clientId);
+  await deleteClientService(clientId);
 
   return res.status(204).json({});
 };

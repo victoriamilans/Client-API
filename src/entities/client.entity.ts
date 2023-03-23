@@ -28,7 +28,7 @@ class Client {
   password: string;
 
   @Column({ type: "varchar" })
-  telephone: string;
+  phone: string;
 
   @Column({ type: "boolean", default: true })
   isActive: boolean;

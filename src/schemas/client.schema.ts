@@ -5,7 +5,7 @@ export const clientSchema = z.object({
   fullName: z.string().min(3),
   email: z.string().email(),
   password: z.string().min(6),
-  telephone: z.string(),
+  phone: z.string(),
 });
 
 export const clientToReturnSchema: any = clientSchema
@@ -15,9 +15,13 @@ export const clientToReturnSchema: any = clientSchema
     updatedAt: z.string(),
     deletedAt: z.string().nullable(),
     isActive: z.boolean(),
-    contacts: z.array(contactToReturnSchema.omit({ client: true })),
+    contacts: z.array(contactToReturnSchema.omit({ client: true })).optional(),
   })
   .omit({ password: true });
+
+export const clientToContactReturn: any = clientToReturnSchema.omit({
+  contacts: true,
+});
 
 export const multipleClientsSchema = clientToReturnSchema.array();
 

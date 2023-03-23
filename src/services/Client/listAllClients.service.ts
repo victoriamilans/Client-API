@@ -1,8 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import Client from "../../entities/client.entity";
-import { IClientResponse } from "../../interfaces/client.interface";
-import { multipleClientsSchema } from "../../schemas/client.schema";
 
 export const listAllClientsService = async (payload: any): Promise<any> => {
   const page = payload.page ? parseInt(payload.page.toString()) : 1;
@@ -17,17 +14,19 @@ export const listAllClientsService = async (payload: any): Promise<any> => {
 
   const totalPages = Math.ceil(totalResults / limit);
 
+  clients.forEach((client) => Reflect.deleteProperty(client, "password"));
+
   const response = {
     currentPage: page,
     totalResults,
     resultsPerPage: limit,
     nextPage:
       page < totalPages
-        ? `http://localhost:3000/movies?page=${page + 1}&limit=${limit}`
+        ? `http://localhost:3000/clients?page=${page + 1}&limit=${limit}`
         : null,
     previousPage:
       page > 1
-        ? `http://localhost:3000/movies?page=${page - 1}&limit=${limit}`
+        ? `http://localhost:3000/clients?page=${page - 1}&limit=${limit}`
         : null,
     clients,
   };
