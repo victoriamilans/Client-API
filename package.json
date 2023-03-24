@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
-    "tsc": "tsc",
+    "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose --runInBand",
-    "start": "node dist/server.js",
-    "run": "node dist/server.js"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
