@@ -1,7 +1,7 @@
 # Client-API
 
 ### ClientAPI é uma api que tem como objetivo gerenciar clientes e seus contatos através de CRUD.
-[API Doc](https://live-living-api-doc.vercel.app/)
+[API Doc](https://client-api-doc.vercel.app/)
 
 ---
 
@@ -35,7 +35,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [Pg](https://www.npmjs.com/package/pg)
 - [Dotenv](https://www.npmjs.com/package/dotenv)
 
-A URL base da aplicação (deploy) : https://livelivingapi.onrender.com
+A URL base da aplicação (deploy) : https://clientapi-ble6.onrender.com.
 
 ---
 
