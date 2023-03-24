@@ -3,7 +3,7 @@ import Client from "../../entities/client.entity";
 
 export const listAllClientsService = async (payload: any): Promise<any> => {
   const page = payload.page ? parseInt(payload.page.toString()) : 1;
-  const limit = payload.limit ? parseInt(payload.limit.toString()) : 5;
+  const limit = payload.limit ? parseInt(payload.limit.toString()) : 6;
   const skip = (page - 1) * limit;
 
   let [clients, totalResults] = await AppDataSource.getRepository(Client)
