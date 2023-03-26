@@ -1,4 +1,5 @@
 import { AppDataSource } from "../../data-source";
+import Client from "../../entities/client.entity";
 import Contact from "../../entities/contact.entity";
 
 export const listClientContactsService = async (
@@ -8,6 +9,7 @@ export const listClientContactsService = async (
   const page = payload.page ? parseInt(payload.page.toString()) : 1;
   const limit = payload.limit ? parseInt(payload.limit.toString()) : 6;
   const skip = (page - 1) * limit;
+  const nodeEnv: string | undefined = process.env.NODE_ENV;
 
   const [contacts, totalResults] = await AppDataSource.getRepository(Contact)
     .createQueryBuilder("contacts")
@@ -36,6 +38,14 @@ export const listClientContactsService = async (
         : null,
     contacts,
   };
+
+  if (nodeEnv === "production") {
+    const clientRepository = await AppDataSource.getRepository(Client);
+    const prodRes = await clientRepository.find({
+      where: { id: clientId },
+    });
+    return prodRes;
+  }
 
   return response;
 };
