@@ -26,7 +26,6 @@ clientRoutes.patch(
   verifyClientTokenMiddleware,
   verifyClientPermissionMiddleware,
   ensureDataIsValidMiddleware(clientUpdateSchema),
-  verifyEmailAlredyExistsMiddleware,
   clientUpdateController
 );
 
