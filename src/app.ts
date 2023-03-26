@@ -4,10 +4,12 @@ import clientRoutes from "./routes/client.route";
 import { handleErrors } from "./errors";
 import loginRoute from "./routes/login.route";
 import contactRoutes from "./routes/contact.route";
+import cors from "cors";
 
 const app: Application = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/client", clientRoutes);
 app.use("/login", loginRoute);
