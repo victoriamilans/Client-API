@@ -33,5 +33,5 @@ export const clientLoginService = async (
     subject: client.id,
   });
 
-  return { token: token };
+  return { token: token, client: client.id };
 };
