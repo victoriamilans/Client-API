@@ -35,21 +35,24 @@ export const listAllClientsService = async (payload: any): Promise<any> => {
   };
 
   if (nodeEnv === "production") {
+    const searchParams = new URLSearchParams({
+      page: (page + 1).toString(),
+      limit: limit.toString(),
+    });
     const prodRes = {
       currentPage: page,
       totalResults,
       resultsPerPage: limit,
       nextPage:
         page < totalPages
-          ? `http://localhost:3000/clients?${URLSearchParams.toString()}`
+          ? `https://clientapi-ble6.onrender.com./clients?${searchParams.toString()}`
           : null,
       previousPage:
         page > 1
-          ? `http://localhost:3000/clients?${URLSearchParams.toString()}`
+          ? `https://clientapi-ble6.onrender.com./clients?${searchParams.toString()}`
           : null,
       clients,
     };
-
     return prodRes;
   }
 
