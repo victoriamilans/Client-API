@@ -41,15 +41,11 @@ export const listAllClientsService = async (payload: any): Promise<any> => {
       resultsPerPage: limit,
       nextPage:
         page < totalPages
-          ? `https://clientapi-ble6.onrender.com/clients?page=${
-              page + 1
-            }&limit=${limit}`
+          ? `http://localhost:3000/clients?${URLSearchParams.toString()}`
           : null,
       previousPage:
         page > 1
-          ? `https://clientapi-ble6.onrender.com/clients?page=${
-              page - 1
-            }&limit=${limit}`
+          ? `http://localhost:3000/clients?${URLSearchParams.toString()}`
           : null,
       clients,
     };
