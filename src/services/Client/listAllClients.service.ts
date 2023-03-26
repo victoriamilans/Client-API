@@ -1,7 +1,10 @@
 import { AppDataSource } from "../../data-source";
 import Client from "../../entities/client.entity";
+import "dotenv/config";
 
 export const listAllClientsService = async (payload: any): Promise<any> => {
+  const nodeEnv: string | undefined = process.env.NODE_ENV;
+
   const page = payload.page ? parseInt(payload.page.toString()) : 1;
   const limit = payload.limit ? parseInt(payload.limit.toString()) : 6;
   const skip = (page - 1) * limit;
@@ -30,6 +33,29 @@ export const listAllClientsService = async (payload: any): Promise<any> => {
         : null,
     clients,
   };
+
+  if (nodeEnv === "production") {
+    const prodRes = {
+      currentPage: page,
+      totalResults,
+      resultsPerPage: limit,
+      nextPage:
+        page < totalPages
+          ? `https://clientapi-ble6.onrender.com/clients?page=${
+              page + 1
+            }&limit=${limit}`
+          : null,
+      previousPage:
+        page > 1
+          ? `https://clientapi-ble6.onrender.com/clients?page=${
+              page - 1
+            }&limit=${limit}`
+          : null,
+      clients,
+    };
+
+    return prodRes;
+  }
 
   return response;
 };
