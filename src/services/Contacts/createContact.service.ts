@@ -36,10 +36,11 @@ export const createContactService = async (
 
   if (isDefault) {
     const newContact = allContacts.forEach(async (contact) => {
-      contactRepository.create({
-        ...contact,
-        isDefault: false,
-      });
+      AppDataSource.getRepository(Contact)
+        .createQueryBuilder()
+        .update(contact)
+        .set({ isDefault: false })
+        .execute();
       await contactRepository.save(contact);
     });
   }
