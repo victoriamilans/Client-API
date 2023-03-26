@@ -20,11 +20,29 @@ export const createContactService = async (
     },
   });
 
+  const allContacts = await AppDataSource.getRepository(Contact)
+    .createQueryBuilder("contact")
+    .leftJoinAndSelect("contact.client", "client")
+    .where("client.id = :id", { id: client })
+    .getMany();
+
+  console.log(allContacts);
+
   if (!findClient) {
     throw new AppError("Client not found", 404);
   }
   Reflect.deleteProperty(findClient, "contacts");
   Reflect.deleteProperty(findClient, "password");
+
+  if (isDefault) {
+    const newContact = allContacts.forEach(async (contact) => {
+      contactRepository.create({
+        ...contact,
+        isDefault: false,
+      });
+      await contactRepository.save(contact);
+    });
+  }
 
   const newContact = contactRepository.create({
     fullName: fullName,
