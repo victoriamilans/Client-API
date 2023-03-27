@@ -26,8 +26,6 @@ export const createContactService = async (
     .where("client.id = :id", { id: client })
     .getMany();
 
-  console.log(allContacts);
-
   if (!findClient) {
     throw new AppError("Client not found", 404);
   }
